@@ -1,0 +1,6 @@
+/target
+.env
+src/test.rs
+log/
+/secrets
+*.db

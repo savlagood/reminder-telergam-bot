@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  remainder_bot:
+    image: tirabock/reminder-rust-telegram-bot:latest
+    volumes:
+      - ./log:/app/log
+      - ./data:/app/data
+    environment:
+      - RUST_LOG=${RUST_LOG}
+      - TELOXIDE_TOKEN=${TELOXIDE_TOKEN}
+    networks:
+      - reminder_net
+    restart: always
+
+networks:
+  reminder_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
