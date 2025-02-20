@@ -1,7 +1,7 @@
 use anyhow::Result;
 use chrono::{DateTime, NaiveDateTime, Utc};
 use cron::Schedule;
-use log::info;
+use log::{debug, info};
 use regex::Regex;
 use std::str::FromStr;
 use std::sync::Arc;
@@ -151,12 +151,7 @@ pub async fn handle_remind_single(
     Ok(())
 }
 
-pub async fn handle_unknown_message(bot: Bot, msg: Message) -> Result<()> {
-    info!("{}", format_log(&msg, "unknown command"));
-    bot.send_message(
-        msg.chat.id,
-        "Неизвестная команда. Используйте /start для просмотра доступных команд.",
-    )
-    .await?;
+pub async fn handle_unknown_message(_bot: Bot, msg: Message) -> Result<()> {
+    debug!("{}", format_log(&msg, "unknown command"));
     Ok(())
 }
